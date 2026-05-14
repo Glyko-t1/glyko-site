@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Glyko — L'app de suivi nutritionnel pour les diabétiques en France. Glucides, index glycémique, 55 restaurants français, CIQUAL 2025."/>
+<title>Glyko — Suivi nutritionnel pour diabétiques</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{--forest:#1A3A2A;--green:#2D7A4F;--green-l:#E8F5EE;--gold:#F0C040;--violet:#7F77DD;--cream:#F7F5F0;--gray:#6B7280;--dark:#111827}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--cream);color:var(--dark)}
+
+  /* Header */
+  nav{background:var(--forest);padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+  .nav-logo{color:var(--gold);font-size:20px;font-weight:700;text-decoration:none}
+  .nav-links{display:flex;gap:20px}
+  .nav-links a{color:rgba(255,255,255,.8);text-decoration:none;font-size:14px}
+  .nav-links a:hover{color:#fff}
+
+  /* Hero */
+  .hero{background:linear-gradient(135deg,var(--forest) 0%,#0D2618 100%);padding:80px 24px;text-align:center}
+  .hero-badge{display:inline-block;background:rgba(240,192,64,.15);color:var(--gold);border:1px solid rgba(240,192,64,.3);padding:6px 18px;border-radius:20px;font-size:13px;font-weight:600;margin-bottom:24px;letter-spacing:.5px}
+  .hero h1{font-size:clamp(28px,5vw,52px);color:#fff;font-weight:700;line-height:1.2;margin-bottom:16px}
+  .hero h1 span{color:var(--gold)}
+  .hero p{font-size:18px;color:rgba(255,255,255,.75);max-width:540px;margin:0 auto 36px;line-height:1.6}
+  .hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .btn-primary{background:var(--gold);color:var(--forest);padding:14px 28px;border-radius:12px;font-size:15px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+  .btn-secondary{background:rgba(255,255,255,.1);color:#fff;padding:14px 28px;border-radius:12px;font-size:15px;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,.2)}
+  .hero-note{color:rgba(255,255,255,.5);font-size:12px;margin-top:16px}
+
+  /* Stats */
+  .stats{background:#fff;padding:32px 24px}
+  .stats-inner{max-width:800px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;text-align:center}
+  .stat-val{font-size:28px;font-weight:700;color:var(--green)}
+  .stat-lbl{font-size:12px;color:var(--gray);margin-top:4px}
+
+  /* Features */
+  .features{padding:64px 24px;max-width:1000px;margin:0 auto}
+  .section-badge{display:inline-block;background:var(--green-l);color:var(--green);padding:4px 14px;border-radius:20px;font-size:12px;font-weight:600;margin-bottom:12px}
+  .features h2{font-size:32px;font-weight:700;color:var(--dark);margin-bottom:8px}
+  .features p.sub{font-size:16px;color:var(--gray);margin-bottom:40px;max-width:500px}
+  .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+  .feat-card{background:#fff;border-radius:16px;padding:24px;border:0.5px solid #E5E7EB}
+  .feat-ico{font-size:32px;margin-bottom:14px;display:block}
+  .feat-title{font-size:16px;font-weight:600;color:var(--dark);margin-bottom:8px}
+  .feat-desc{font-size:14px;color:var(--gray);line-height:1.6}
+  .feat-badge{display:inline-block;margin-top:10px;font-size:11px;background:var(--green-l);color:var(--green);padding:2px 8px;border-radius:10px;font-weight:500}
+  .feat-badge.premium{background:#EEEDFE;color:#534AB7}
+
+  /* Pour qui */
+  .for-who{background:var(--forest);padding:64px 24px;text-align:center}
+  .for-who h2{font-size:28px;font-weight:700;color:#fff;margin-bottom:8px}
+  .for-who p{color:rgba(255,255,255,.7);margin-bottom:36px;font-size:16px}
+  .profiles{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;max-width:700px;margin:0 auto}
+  .profile-pill{background:rgba(255,255,255,.1);color:#fff;padding:10px 20px;border-radius:30px;font-size:14px;font-weight:500;border:1px solid rgba(255,255,255,.2)}
+
+  /* Pricing */
+  .pricing{padding:64px 24px;max-width:700px;margin:0 auto;text-align:center}
+  .pricing h2{font-size:32px;font-weight:700;margin-bottom:8px}
+  .pricing p{color:var(--gray);margin-bottom:36px}
+  .pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;text-align:left}
+  .price-card{background:#fff;border-radius:16px;padding:24px;border:0.5px solid #E5E7EB}
+  .price-card.featured{border:2px solid var(--green);background:var(--green-l)}
+  .price-badge{font-size:11px;font-weight:600;color:var(--green);background:#fff;padding:3px 10px;border-radius:10px;margin-bottom:12px;display:inline-block}
+  .price-name{font-size:16px;font-weight:600;color:var(--dark);margin-bottom:6px}
+  .price-val{font-size:28px;font-weight:700;color:var(--green)}
+  .price-period{font-size:13px;color:var(--gray)}
+  .price-features{list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:8px}
+  .price-features li{font-size:13px;color:var(--gray);display:flex;gap:6px}
+  .price-features li::before{content:"✓";color:var(--green);font-weight:700}
+  .trial-note{font-size:12px;color:var(--gray);text-align:center;margin-top:12px}
+
+  /* CTA */
+  .cta{background:linear-gradient(135deg,var(--green) 0%,var(--forest) 100%);padding:64px 24px;text-align:center}
+  .cta h2{font-size:28px;font-weight:700;color:#fff;margin-bottom:12px}
+  .cta p{color:rgba(255,255,255,.75);margin-bottom:28px;font-size:16px}
+
+  /* Footer */
+  footer{background:var(--forest);padding:32px 24px;text-align:center}
+  .footer-links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+  .footer-links a{color:rgba(255,255,255,.6);text-decoration:none;font-size:13px}
+  .footer-links a:hover{color:#fff}
+  footer p{color:rgba(255,255,255,.4);font-size:12px}
+
+  @media(max-width:600px){
+    .stats-inner{grid-template-columns:repeat(2,1fr)}
+    .pricing-grid{grid-template-columns:1fr}
+    .hero h1{font-size:28px}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">🌿 Glyko</a>
+  <div class="nav-links">
+    <a href="#features">Fonctionnalités</a>
+    <a href="#pricing">Tarifs</a>
+    <a href="confidentialite.html">Confidentialité</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">🇫🇷 100% Français · Données CIQUAL ANSES 2025</div>
+  <h1>Le suivi nutritionnel<br/>conçu pour les <span>diabétiques</span></h1>
+  <p>Glucides au gramme près, index glycémique, 55 chaînes françaises et 4 000+ aliments. Glyko vous aide à gérer votre alimentation au quotidien.</p>
+  <div class="hero-btns">
+    <a href="#" class="btn-primary">📱 Télécharger sur iOS</a>
+    <a href="#" class="btn-secondary">🤖 Disponible sur Android</a>
+  </div>
+  <p class="hero-note">Essai gratuit 14 jours · Sans carte bancaire · Annulable à tout moment</p>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stats-inner">
+    <div><div class="stat-val">4 000+</div><div class="stat-lbl">Aliments référencés</div></div>
+    <div><div class="stat-val">55</div><div class="stat-lbl">Chaînes françaises</div></div>
+    <div><div class="stat-val">3 484</div><div class="stat-lbl">Aliments CIQUAL 2025</div></div>
+    <div><div class="stat-val">100%</div><div class="stat-lbl">Données françaises</div></div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<div class="features" id="features">
+  <div class="section-badge">Fonctionnalités</div>
+  <h2>Tout ce dont vous avez besoin</h2>
+  <p class="sub">Conçu avec et pour les diabétiques de type 1 et 2, et leur entourage.</p>
+
+  <div class="features-grid">
+    <div class="feat-card">
+      <span class="feat-ico">🍔</span>
+      <div class="feat-title">55 restaurants français</div>
+      <div class="feat-desc">McDonald's, KFC, Paul, Buffalo Grill, Starbucks... Tous les menus avec leurs valeurs nutritionnelles exactes.</div>
+    </div>
+    <div class="feat-card">
+      <span class="feat-ico">📊</span>
+      <div class="feat-title">Glucides au gramme près</div>
+      <div class="feat-desc">Glucides totaux, glucides nets (- fibres), index glycémique, charge glycémique. Les données critiques pour les diabétiques T1.</div>
+    </div>
+    <div class="feat-card">
+      <span class="feat-ico">💉</span>
+      <div class="feat-title">Dose insuline indicative</div>
+      <div class="feat-desc">Calcul automatique de la dose indicative selon votre ratio personnel. À valider avec votre médecin.</div>
+    </div>
+    <div class="feat-card">
+      <span class="feat-ico">📅</span>
+      <div class="feat-title">Journal alimentaire</div>
+      <div class="feat-desc">Enregistrez chaque repas en quelques secondes. Suivez vos glucides quotidiens vs votre objectif personnalisé.</div>
+    </div>
+    <div class="feat-card">
+      <span class="feat-ico">📄</span>
+      <div class="feat-title">Export PDF médecin</div>
+      <div class="feat-desc">Générez un rapport nutritionnel complet à partager avec votre diabétologue en un clic.</div>
+      <span class="feat-badge premium">⭐ Premium</span>
+    </div>
+    <div class="feat-card">
+      <span class="feat-ico">📈</span>
+      <div class="feat-title">Graphiques semaine/mois</div>
+      <div class="feat-desc">Visualisez vos tendances glucidiques sur 7, 14 ou 30 jours. Identifiez les jours problématiques.</div>
+      <span class="feat-badge premium">⭐ Premium</span>
+    </div>
+    <div class="feat-card">
+      <span class="feat-ico">🔔</span>
+      <div class="feat-title">Rappels repas</div>
+      <div class="feat-desc">Ne ratez plus un suivi. Configurez vos rappels pour chaque repas de la journée.</div>
+      <span class="feat-badge premium">⭐ Premium</span>
+    </div>
+    <div class="feat-card">
+      <span class="feat-ico">🔄</span>
+      <div class="feat-title">Mise à jour automatique</div>
+      <div class="feat-desc">Notre système de veille détecte automatiquement les nouveaux menus et produits chaque nuit.</div>
+    </div>
+  </div>
+</div>
+
+<!-- POUR QUI -->
+<div class="for-who">
+  <h2>Pour qui est Glyko ?</h2>
+  <p>Une app adaptée à tous les profils</p>
+  <div class="profiles">
+    <div class="profile-pill">💉 Diabétique Type 1</div>
+    <div class="profile-pill">🩺 Diabétique Type 2</div>
+    <div class="profile-pill">❤️ Proche de diabétique</div>
+    <div class="profile-pill">🏃 Sportif</div>
+    <div class="profile-pill">⚖️ Perte de poids</div>
+  </div>
+</div>
+
+<!-- PRICING -->
+<div class="pricing" id="pricing">
+  <h2>Tarifs simples</h2>
+  <p>Commencez gratuitement, passez Premium quand vous êtes prêt.</p>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="price-name">Gratuit</div>
+      <div class="price-val">0€</div>
+      <div class="price-period">pour toujours</div>
+      <ul class="price-features">
+        <li>Recherche aliments illimitée</li>
+        <li>Journal 3 derniers jours</li>
+        <li>55 restaurants français</li>
+        <li>CIQUAL 2025 — 3 484 aliments</li>
+        <li>Index glycémique</li>
+      </ul>
+    </div>
+    <div class="price-card featured">
+      <div class="price-badge">⭐ Le plus populaire</div>
+      <div class="price-name">Premium</div>
+      <div class="price-val">3,99€</div>
+      <div class="price-period">/mois · ou 27,99€/an</div>
+      <ul class="price-features">
+        <li>Tout le plan gratuit</li>
+        <li>Historique illimité</li>
+        <li>Graphiques semaine/mois</li>
+        <li>Export PDF médecin</li>
+        <li>Rappels repas personnalisés</li>
+        <li>Mode hors ligne</li>
+        <li>Favoris illimités</li>
+        <li>Zéro publicité</li>
+      </ul>
+      <div class="trial-note">✓ Essai gratuit 14 jours · Annulable à tout moment</div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta">
+  <h2>Prêt à mieux gérer votre alimentation ?</h2>
+  <p>Rejoignez les diabétiques qui font confiance à Glyko pour leur suivi quotidien.</p>
+  <div class="hero-btns">
+    <a href="#" class="btn-primary">📱 Télécharger gratuitement</a>
+  </div>
+  <p class="hero-note" style="color:rgba(255,255,255,.5);margin-top:12px">Disponible sur iOS et Android</p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-links">
+    <a href="confidentialite.html">Politique de confidentialité</a>
+    <a href="cgu.html">Conditions d'utilisation</a>
+    <a href="mentions-legales.html">Mentions légales</a>
+    <a href="mailto:contact@glyko.fr">Contact</a>
+  </div>
+  <p>© 2026 Glyko · Données nutritionnelles : CIQUAL ANSES 2025 · Open Food Facts · Hébergé en France</p>
+  <p style="margin-top:6px">Glyko est un outil d'information nutritionnelle. Il ne remplace pas l'avis de votre médecin.</p>
+</footer>
+
+</body>
+</html>
